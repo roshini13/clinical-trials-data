@@ -39,7 +39,7 @@ if total_missing == 0:
     print("\nPASS: No required values are missing.")
 else:
     print(f"\nFAIL: Found {total_missing} missing required values.")
-    # DQ002: NCT IDs must be unique
+# DQ002: NCT IDs must be unique
 duplicate_studies = studies_df[
     studies_df.duplicated(
         subset=["nct_id"],
