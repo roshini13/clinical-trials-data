@@ -59,3 +59,37 @@ else:
         f"FAIL: Found {len(duplicate_studies)} "
         "records with duplicate NCT IDs."
     )
+# DQ003: Recruiting records should be updated within 365 days
+studies_df["last_update_date"] = pd.to_datetime(
+    studies_df["last_update_date"],
+    errors="coerce"
+)
+
+today = pd.Timestamp.today().normalize()
+
+studies_df["days_since_update"] = (
+    today - studies_df["last_update_date"]
+).dt.days
+
+stale_studies = studies_df[
+    studies_df["days_since_update"] > 365
+].copy()
+
+stale_studies.to_csv(
+    "data/quality/stale_recruiting_studies.csv",
+    index=False
+)
+
+if stale_studies.empty:
+    print("PASS: No outdated recruiting records found.")
+else:
+    print(
+        f"REVIEW: Found {len(stale_studies)} recruiting "
+        "studies not updated within 365 days."
+    )
+
+    print(
+        stale_studies[
+            ["nct_id", "last_update_date", "days_since_update"]
+        ]
+    )
