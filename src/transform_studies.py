@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Read the raw API data
-with open("data/raw/studies_5.json", "r", encoding="utf-8") as file:
+with open("data/raw/studies.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
 records = []

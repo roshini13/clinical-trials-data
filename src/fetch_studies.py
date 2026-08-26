@@ -8,7 +8,7 @@ parameters = {
     "query.locn": "New York",
     "filter.overallStatus": "RECRUITING",
     "format": "json",
-    "pageSize": 5
+    "pageSize": 100
 }
 
 response = requests.get(API_URL, params=parameters, timeout=30)
@@ -18,10 +18,10 @@ response.raise_for_status()
 
 data = response.json()
 studies = data["studies"]
-with open("data/raw/studies_5.json", "w", encoding="utf-8") as file:
+with open("data/raw/studies.json", "w", encoding="utf-8") as file:
     json.dump(data, file, indent=2)
 
-print("Raw data saved to data/raw/studies_5.json")
+print("Raw data saved to data/raw/studies.json")
 print("Main API response sections:", data.keys())
 print("Sections inside one study:", studies[0].keys())
 print()
