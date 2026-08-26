@@ -39,3 +39,23 @@ if total_missing == 0:
     print("\nPASS: No required values are missing.")
 else:
     print(f"\nFAIL: Found {total_missing} missing required values.")
+    # DQ002: NCT IDs must be unique
+duplicate_studies = studies_df[
+    studies_df.duplicated(
+        subset=["nct_id"],
+        keep=False
+    )
+].copy()
+
+duplicate_studies.to_csv(
+    "data/quality/duplicate_nct_ids.csv",
+    index=False
+)
+
+if duplicate_studies.empty:
+    print("PASS: No duplicate NCT IDs found.")
+else:
+    print(
+        f"FAIL: Found {len(duplicate_studies)} "
+        "records with duplicate NCT IDs."
+    )
