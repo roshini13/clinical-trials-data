@@ -93,3 +93,56 @@ else:
             ["nct_id", "last_update_date", "days_since_update"]
         ]
     )
+# Create a standardized operational issue table
+issues_df = stale_studies[
+    ["nct_id", "days_since_update"]
+].copy()
+
+issues_df["issue_id"] = (
+    "DQ003-" + issues_df["nct_id"]
+)
+
+issues_df["rule_id"] = "DQ003"
+issues_df["field_name"] = "last_update_date"
+
+issues_df["issue_description"] = issues_df[
+    "days_since_update"
+].apply(
+    lambda days: (
+        f"Recruiting study has not been updated for {days} days"
+    )
+)
+
+issues_df["priority"] = issues_df[
+    "days_since_update"
+].apply(
+    lambda days: "HIGH" if days > 730 else "MEDIUM"
+)
+
+issues_df["detected_date"] = today.date().isoformat()
+issues_df["issue_status"] = "OPEN"
+
+issues_df = issues_df[
+    [
+        "issue_id",
+        "nct_id",
+        "rule_id",
+        "field_name",
+        "issue_description",
+        "priority",
+        "detected_date",
+        "issue_status"
+    ]
+]
+
+issues_df.to_csv(
+    "data/quality/data_quality_issues.csv",
+    index=False
+)
+
+print(
+    f"\nCreated standardized issue table "
+    f"with {len(issues_df)} open issues."
+)
+
+print(issues_df)

@@ -1,0 +1,10 @@
+issue_id,nct_id,rule_id,field_name,issue_description,priority,detected_date,issue_status
+DQ003-NCT03860883,NCT03860883,DQ003,last_update_date,Recruiting study has not been updated for 637 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT01574053,NCT01574053,DQ003,last_update_date,Recruiting study has not been updated for 910 days,HIGH,2026-08-26,OPEN
+DQ003-NCT04994015,NCT04994015,DQ003,last_update_date,Recruiting study has not been updated for 462 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT05500170,NCT05500170,DQ003,last_update_date,Recruiting study has not been updated for 369 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT06952517,NCT06952517,DQ003,last_update_date,Recruiting study has not been updated for 477 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT03266653,NCT03266653,DQ003,last_update_date,Recruiting study has not been updated for 383 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT02781883,NCT02781883,DQ003,last_update_date,Recruiting study has not been updated for 537 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT07133984,NCT07133984,DQ003,last_update_date,Recruiting study has not been updated for 370 days,MEDIUM,2026-08-26,OPEN
+DQ003-NCT04914507,NCT04914507,DQ003,last_update_date,Recruiting study has not been updated for 1015 days,HIGH,2026-08-26,OPEN
