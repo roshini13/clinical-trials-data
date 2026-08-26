@@ -1,3 +1,5 @@
 requests
 pandas
 Flask
+psycopg[binary]
+python-dotenv
