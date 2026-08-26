@@ -113,5 +113,53 @@ def get_issues():
     except psycopg.Error:
         app.logger.exception("Issue query failed")
         return jsonify({"error": "Unable to retrieve issues"}), 500
+@app.get("/api/studies/<nct_id>/issues")
+def get_study_issues(nct_id):
+    normalized_nct_id = nct_id.upper()
+
+    if (
+        len(normalized_nct_id) != 11
+        or not normalized_nct_id.startswith("NCT")
+        or not normalized_nct_id[3:].isdigit()
+    ):
+        return jsonify(
+            {
+                "error": "NCT ID must use the format NCT followed by 8 digits"
+            }
+        ), 400
+
+    try:
+        with get_db_connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT *
+                    FROM vw_study_issue_details
+                    WHERE nct_id = %s
+                    ORDER BY detected_date DESC;
+                    """,
+                    (normalized_nct_id,)
+                )
+                issues = cursor.fetchall()
+
+        if not issues:
+            return jsonify(
+                {
+                    "error": "No data quality issues found",
+                    "nct_id": normalized_nct_id
+                }
+            ), 404
+
+        return jsonify(
+            {
+                "count": len(issues),
+                "issues": issues,
+                "nct_id": normalized_nct_id
+            }
+        )
+
+    except psycopg.Error:
+        app.logger.exception("Study issue query failed")
+        return jsonify({"error": "Unable to retrieve study issues"}), 500    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
