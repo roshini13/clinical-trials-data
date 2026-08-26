@@ -1,0 +1,7 @@
+field_name,missing_count,rule_id,rule_description
+nct_id,0,DQ001,Required field must not be missing
+brief_title,0,DQ001,Required field must not be missing
+overall_status,0,DQ001,Required field must not be missing
+lead_sponsor,0,DQ001,Required field must not be missing
+enrollment,0,DQ001,Required field must not be missing
+last_update_date,0,DQ001,Required field must not be missing
